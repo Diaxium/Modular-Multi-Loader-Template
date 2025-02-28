@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.example.modular_multi_loader_template","l":"Common"},{"p":"com.example.modular_multi_loader_template","l":"Constants"}];updateSearchResults();

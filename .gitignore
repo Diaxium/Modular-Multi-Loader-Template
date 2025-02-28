@@ -1,14 +1,28 @@
-# Ignore build output
-/build/
-/run/
-/out/
+# ========================================
+# 🚀 Git Ignore for Modular-Multi-Loader
+# ========================================
+
+# 📌 Ignore Gradle cache and build directories
 /.gradle/
-/.idea/
+plugins/.gradle
+/plugins/build
 /core/app/platform/fabric/.gradle
+
+# ✅ Allow Gradle Wrapper files (ensures Gradle is tracked)
+!gradle/
+!gradle/wrapper/**
+
+# 📌 Ignore IDE and system-specific files
+/.idea/
+/.gitattributes
+
+# 📌 Ignore build-related directories
+/build/
+.run/
+.out/
+.docs/
+
+# 📌 Ignore run test directories
 /core/app/platform/fabric/run
 /core/app/platform/forge/run
 /core/app/platform/neoforge/run
-/docs
-/plugins/.gradle
-/plugins/build
-.gitattributes

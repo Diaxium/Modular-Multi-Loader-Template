@@ -1,33 +1,40 @@
-// #:Root Build.gradle
+// Root build.gradle
 
 plugins {
-    // see https://fabricmc.net/develop/ for new versions
+    // Apply necessary plugins
     id 'fabric-loom' version '1.10-SNAPSHOT' apply false
-    // see https://projects.neoforged.net/neoforged/moddevgradle for new versions
     id 'net.neoforged.moddev' version '1.0.11' apply false
 }
 
 subprojects {
     // Centralized Build Artifacts
     layout.buildDirectory = layout.projectDirectory.dir(
-            name == 'api' || name == 'utils'
-                    ? "${rootProject.layout.buildDirectory.get()}/core/${name}"
-                    : (name in ['fabric', 'forge', 'neoforge'])
-                    ? "${rootProject.layout.buildDirectory.get()}/core/app/platform/${name}"
-                    : "${rootProject.layout.buildDirectory.get()}/core/app/${name}"
+            name == 'api' || name == 'utils' ? "${rootProject.layout.buildDirectory.get()}/core/${name}" :
+                    (name in ['fabric', 'forge', 'neoforge']) ? "${rootProject.layout.buildDirectory.get()}/core/app/platform/${name}" :
+                            "${rootProject.layout.buildDirectory.get()}/core/app/${name}"
     )
 
     // Centralized Documentation
     tasks.withType(Javadoc).configureEach {
-        setDestinationDir(rootProject.layout.projectDirectory.dir("docs/${project.name}").asFile)
+        // Determine the relative path for the Javadoc output
+        def relativePath = project.path.replace(':', '/')
+        destinationDir = rootProject.file("docs${relativePath}")
     }
 }
 
+// Aggregate Javadoc for all subprojects
 tasks.register("aggregateJavadoc", Javadoc) {
     group = "documentation"
     description = "Generates Javadoc for all subprojects in a centralized directory."
 
-    source subprojects.collect { it.sourceSets.main.allJava }
-    classpath = files(subprojects.collect { it.sourceSets.main.compileClasspath })
-    setDestinationDir(rootProject.layout.projectDirectory.dir("docs/aggregate").asFile)
+    // Collect sources and classpaths from all Java subprojects
+    def allJavaSources = files(subprojects.findAll { it.plugins.hasPlugin('java') }.collect { it.sourceSets.main.allJava.srcDirs })
+    def allClasspaths = files(subprojects.findAll { it.plugins.hasPlugin('java') }.collect { it.sourceSets.main.compileClasspath })
+
+    // Set the source and classpath for the aggregate Javadoc task
+    source = allJavaSources
+    classpath = allClasspaths
+
+    // Set the destination directory for the aggregated Javadoc
+    destinationDir = rootProject.file("docs/aggregate")
 }

@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.example.modular_multi_loader_template","l":"Api"},{"p":"com.example.modular_multi_loader_template.platform.services","l":"IPlatformHelper"}];updateSearchResults();
