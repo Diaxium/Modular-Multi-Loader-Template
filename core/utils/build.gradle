@@ -1,0 +1,16 @@
+// #:Core:utils Build.gradle
+
+plugins {
+    id ("type-library")
+}
+
+apply from: rootProject.file('dependencies.gradle')
+
+dependencies {
+    implementation(libraries.global.night_config.core)
+    implementation(libraries.global.night_config.toml)
+    implementation(libraries.global.night_config.json)
+
+    implementation(libraries.global.log4j.core)
+    implementation(libraries.global.log4j.api)
+}

@@ -1,0 +1,52 @@
+// #type-platform.gradle
+
+plugins {
+    id 'type-common'
+}
+
+configurations {
+    // Define custom, resolvable configurations for Java sources and resources.
+    commonJava {
+        canBeResolved = true
+    }
+    commonResources {
+        canBeResolved = true
+    }
+}
+
+dependencies {
+    // Use compileOnly to add a dependency on the common module with a specific capability.
+    compileOnly(project(':core:app:common')) {
+        capabilities {
+            requireCapability "${project_group}:${project_id}"
+        }
+    }
+    // Populate the custom configurations from the common module.
+    commonJava project(path: ':core:app:common', configuration: 'commonJava')
+    commonResources project(path: ':core:app:common', configuration: 'commonResources')
+}
+
+// Configure compileJava to compile additional source files from commonJava.
+tasks.named('compileJava', JavaCompile) {
+    dependsOn configurations.commonJava
+    source configurations.commonJava
+}
+
+// Include common resources during the processResources task.
+processResources {
+    dependsOn configurations.commonResources
+    from configurations.commonResources
+}
+
+// Configure javadoc to document the sources from commonJava.
+tasks.named('javadoc', Javadoc).configure {
+    dependsOn configurations.commonJava
+    source configurations.commonJava
+}
+
+// Configure sourcesJar to bundle both commonJava sources and commonResources.
+tasks.named('sourcesJar', Jar) {
+    dependsOn configurations.commonJava, configurations.commonResources
+    from configurations.commonJava
+    from configurations.commonResources
+}

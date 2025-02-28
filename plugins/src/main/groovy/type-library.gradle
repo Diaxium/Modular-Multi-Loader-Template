@@ -1,0 +1,68 @@
+// #type-library.gradle
+
+plugins {
+    id 'java-library'
+}
+
+base {
+    // Set the archive name using project-specific properties.
+    archivesName = "${project_id}-${project.name}-${minecraft_version}"
+}
+
+java {
+    // Configure the Java toolchain to use the specified version.
+    toolchain.languageVersion = JavaLanguageVersion.of(java_version)
+
+    // Automatically create sources and Javadoc JARs.
+    withSourcesJar()
+    withJavadocJar()
+}
+
+repositories {
+    mavenCentral()
+
+    // Use a dedicated repository for Sponge artifacts.
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Sponge'
+                url = uri("https://repo.spongepowered.org/repository/maven-public")
+            }
+        }
+        filter { includeGroupAndSubgroups("org.spongepowered") }
+    }
+
+    // Use specific repositories for ParchmentMC and NeoForge artifacts.
+    exclusiveContent {
+        forRepositories(
+                maven {
+                    name = 'ParchmentMC'
+                    url = uri("https://maven.parchmentmc.org/")
+                },
+                maven {
+                    name = "NeoForge"
+                    url = uri("https://maven.neoforged.net/releases")
+                }
+        )
+        filter { includeGroup("org.parchmentmc.data") }
+    }
+
+    // Additional repository for artifacts from net.blay09.mods.
+    maven {
+        url = uri("https://maven.twelveiterations.com/repository/maven-public/")
+        content {
+            includeGroup "net.blay09.mods"
+        }
+    }
+
+    // Repository for BlameJared artifacts.
+    maven {
+        name = "BlameJared"
+        url = uri("https://maven.blamejared.com")
+    }
+}
+
+// Configure all Javadoc tasks to suppress Xdoclint warnings.
+tasks.withType(Javadoc).configureEach {
+    options.addStringOption('Xdoclint:none', '-quiet')
+}

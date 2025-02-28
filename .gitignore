@@ -1,0 +1,14 @@
+# Ignore build output
+/build/
+/run/
+/out/
+/.gradle/
+/.idea/
+/core/app/platform/fabric/.gradle
+/core/app/platform/fabric/run
+/core/app/platform/forge/run
+/core/app/platform/neoforge/run
+/docs
+/plugins/.gradle
+/plugins/build
+.gitattributes

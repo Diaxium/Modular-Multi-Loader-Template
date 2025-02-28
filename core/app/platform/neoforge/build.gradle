@@ -1,0 +1,60 @@
+// #:Core:App:Platform:Neoforge Build.gradle
+
+plugins {
+    id("type-platform")
+    id("net.neoforged.moddev")
+}
+
+apply from: rootProject.file('dependencies.gradle')
+
+dependencies {
+    api project(':core:api')
+
+    implementation(libraries.global.night_config.core)
+    implementation(libraries.global.night_config.toml)
+    implementation(libraries.global.night_config.json)
+
+    implementation(libraries.global.log4j.core)
+    implementation(libraries.global.log4j.api)
+
+    implementation (libraries.neoforge.kuma)
+    implementation (libraries.neoforge.balm) {
+        changing = versions.balm.endsWith("SNAPSHOT")
+    }
+
+}
+
+neoForge {
+    version = neoforge_version
+    // Automatically enable neoforge AccessTransformers if the file exists
+    def at = project(':core:app:common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers.add(at.absolutePath)
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+    runs {
+        configureEach {
+            systemProperty('neoforge.enabledGameTestNamespaces', project_id)
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
+        }
+        client {
+            client()
+        }
+        data {
+            data()
+        }
+        server {
+            server()
+        }
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }

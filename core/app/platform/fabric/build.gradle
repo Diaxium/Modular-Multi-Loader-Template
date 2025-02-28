@@ -1,0 +1,56 @@
+// #:Core:App:Platform:Fabric Build.gradle
+
+plugins {
+    id("type-platform")
+    id("fabric-loom")
+}
+
+apply from: rootProject.file('dependencies.gradle')
+
+dependencies {
+    api project(':core:api')
+
+    implementation(libraries.global.night_config.core)
+    implementation(libraries.global.night_config.toml)
+    implementation(libraries.global.night_config.json)
+
+    implementation(libraries.global.log4j.core)
+    implementation(libraries.global.log4j.api)
+
+    implementation (libraries.fabric.kuma)
+    implementation (libraries.fabric.balm) {
+        changing = versions.balm.endsWith("SNAPSHOT")
+    }
+
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    mappings loom.layered {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
+    }
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+}
+
+loom {
+    def aw = project(':core:app:common').file("src/main/resources/${project_id}.accesswidener")
+    if (aw.exists()) {
+        accessWidenerPath.set(aw)
+    }
+    mixin {
+        defaultRefmapName.set("${project_id}.refmap.json")
+    }
+    runs {
+        client {
+            client()
+            setConfigName('Fabric Client')
+            ideConfigGenerated(true)
+            runDir('runs/client')
+        }
+        server {
+            server()
+            setConfigName('Fabric Server')
+            ideConfigGenerated(true)
+            runDir('runs/server')
+        }
+    }
+}

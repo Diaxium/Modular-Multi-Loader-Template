@@ -1,0 +1,5 @@
+// #:Plugins Build.gradle
+
+plugins {
+    id('groovy-gradle-plugin')
+}

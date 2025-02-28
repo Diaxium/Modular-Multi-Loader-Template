@@ -1,0 +1,62 @@
+pluginManagement {
+        // Include the local plugins build
+        includeBuild("plugins")
+    
+        repositories {
+            gradlePluginPortal()
+            mavenCentral()
+            maven {
+                url = uri("https://maven.firstdarkdev.xyz/releases")
+            }
+            exclusiveContent {
+                forRepository {
+                    maven {
+                        name = 'Fabric'
+                        url = uri('https://maven.fabricmc.net')
+                    }
+                }
+                filter {
+                    includeGroup('net.fabricmc')
+                    includeGroup('fabric-loom')
+                }
+            }
+            exclusiveContent {
+                forRepository {
+                    maven {
+                        name = 'Sponge'
+                        url = uri('https://repo.spongepowered.org/repository/maven-public')
+                    }
+                }
+                filter {
+                    includeGroupAndSubgroups("org.spongepowered")
+                }
+            }
+            exclusiveContent {
+                forRepository {
+                    maven {
+                        name = 'Forge'
+                        url = uri('https://maven.minecraftforge.net')
+                    }
+                }
+                filter {
+                    includeGroupAndSubgroups('net.minecraftforge')
+                }
+            }
+        }
+    }
+    
+    plugins {
+        id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+    }
+    
+    rootProject.name = "Modular-Multi-Loader-Template"
+    
+    // Include the subprojects
+    include(":core:api")
+    include(":core:utils")
+    
+    include(":core:app:common",
+            ":core:app:platform:fabric",
+            ":core:app:platform:forge",
+            ":core:app:platform:neoforge")
+    
