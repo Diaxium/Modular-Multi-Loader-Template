@@ -91,6 +91,40 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Constants</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Contains project-wide constants and configurations.
+
+ <p>This class centralizes key project settings, including metadata and logger configuration.
+ It defines constants for versioning, identification, and a descriptive overview of the project.
+ The logger configuration is set up to provide detailed, consistent logging across the application.
+
+ <h3 id="project-metadata-heading">Project Metadata</h3>
+ <ul>
+   <li><a href="#PROJECT_VERSION"><code>PROJECT_VERSION</code></a> - The current version of the project.</li>
+   <li><a href="#PROJECT_ID"><code>PROJECT_ID</code></a> - A unique identifier for the project.</li>
+   <li><a href="#PROJECT_NAME"><code>PROJECT_NAME</code></a> - The human-readable name of the project.</li>
+   <li><a href="#PROJECT_DESCRIPTION"><code>PROJECT_DESCRIPTION</code></a> - A brief description of the project’s purpose.</li>
+ </ul>
+
+ <h3 id="logger-configuration-heading">Logger Configuration</h3>
+ <p>The <a href="#LOG"><code>LOG</code></a> logger is built using a fluent API from <code>PersistentLogger</code> with the following features:
+ <ul>
+   <li>Custom logger name and version details.</li>
+   <li>Logs are stored in a directory named after the project.</li>
+   <li>No separate log file is used, but a maximum of 5 backup files is maintained.</li>
+   <li>Logging is set to <code>Level.DEBUG</code> to capture detailed information for development and troubleshooting.</li>
+   <li>A custom layout pattern that includes a timestamp, logger name, log level, message, and exception details.</li>
+   <li>Console logging is enabled for real-time output.</li>
+   <li>Java compatibility details are provided based on the ASM library version, indicating support for Java versions 18 to 22,
+       with an extended note for Java 23 (class file version 67.0).</li>
+ </ul>
+
+ <p><strong>Usage Example:</strong>
+ <pre>
+     Logger log = Constants.LOG;
+     log.info("Application started.");
+ </pre>
+
+ <p>This class should be used as the single source of truth for application-wide constants and logging behavior.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -103,9 +137,31 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>static final org.apache.logging.log4j.Logger</code></div>
+<div class="col-second even-row-color"><code><a href="#LOG" class="member-name-link">LOG</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">A persistent logger configured for application-wide use.</div>
+</div>
+<div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#PROJECT_DESCRIPTION" class="member-name-link">PROJECT_DESCRIPTION</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">A brief description of the project's purpose.</div>
+</div>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="#PROJECT_ID" class="member-name-link">PROJECT_ID</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">A unique identifier for the project.</div>
+</div>
+<div class="col-first odd-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#PROJECT_NAME" class="member-name-link">PROJECT_NAME</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">The human-readable name of the project.</div>
+</div>
+<div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="#PROJECT_VERSION" class="member-name-link">PROJECT_VERSION</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">The current version of the project.</div>
+</div>
 </div>
 </section>
 </li>
@@ -141,9 +197,25 @@ loadScripts(document, 'script');</script>
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="PROJECT_VERSION">
+<h3>PROJECT_VERSION</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">PROJECT_VERSION</span></div>
+<div class="block">The current version of the project.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="../../../constant-values.html#com.example.modular_multi_loader_template.Constants.PROJECT_VERSION">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="PROJECT_ID">
 <h3>PROJECT_ID</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">PROJECT_ID</span></div>
+<div class="block">A unique identifier for the project.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -152,6 +224,64 @@ loadScripts(document, 'script');</script>
 </ul>
 </dd>
 </dl>
+</section>
+</li>
+<li>
+<section class="detail" id="PROJECT_NAME">
+<h3>PROJECT_NAME</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">PROJECT_NAME</span></div>
+<div class="block">The human-readable name of the project.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="../../../constant-values.html#com.example.modular_multi_loader_template.Constants.PROJECT_NAME">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="PROJECT_DESCRIPTION">
+<h3>PROJECT_DESCRIPTION</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">PROJECT_DESCRIPTION</span></div>
+<div class="block">A brief description of the project's purpose.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="../../../constant-values.html#com.example.modular_multi_loader_template.Constants.PROJECT_DESCRIPTION">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="LOG">
+<h3>LOG</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">org.apache.logging.log4j.Logger</span>&nbsp;<span class="element-name">LOG</span></div>
+<div class="block">A persistent logger configured for application-wide use.
+ <p>
+ The logger is created using a fluent configuration API provided by <code>PersistentLogger</code>. Its settings include:
+ <ul>
+   <li>Setting the logger name to match the project name and including the project version.</li>
+   <li>Using a log directory named after the project.</li>
+   <li>Disabling separate log files while maintaining a maximum of 5 backup files.</li>
+   <li>Setting the logging level to <code>Level.DEBUG</code> for detailed output.</li>
+   <li>Using a custom layout pattern for log messages:
+       <code>[%d{ddMMMyyyy HH:mm:ss.SSS}][%logger/%level]: %msg%n%xEx</code>, which includes date, logger, level, message, and exceptions.</li>
+   <li>Enabling console logging for real-time feedback.</li>
+   <li>Providing Java compatibility information derived from the ASM version:
+       <ul>
+         <li>First parameter: The ASM version with its supported Java compatibility range.</li>
+         <li>Second parameter: The minimum supported Java version ("18").</li>
+         <li>Third parameter: The maximum supported Java version within the compatibility target ("22").</li>
+         <li>Fourth parameter: A note on extended compatibility ("Up to Java 23 (class file version 67.0)").</li>
+       </ul>
+   </li>
+ </ul>
+
+ <p>This logger can be used throughout the project to ensure consistent logging behavior.</div>
 </section>
 </li>
 </ul>
