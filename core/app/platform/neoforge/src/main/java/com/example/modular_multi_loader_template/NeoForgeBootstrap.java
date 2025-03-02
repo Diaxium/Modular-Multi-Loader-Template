@@ -6,7 +6,9 @@ import net.neoforged.fml.common.Mod;
 
 @Mod(Constants.PROJECT_ID)
 public class NeoForgeBootstrap {
-    public void NeoForgeBootstrap(IEventBus modBus)    {
+    public NeoForgeBootstrap(IEventBus modBus) {
+        Constants.LOG.info("NeoForge Loaded!");
+
         // Initialization code
         Common.initialize();
     }
