@@ -1,9 +1,10 @@
 ext {
     versions = [
-        balm       : '21.0.29-SNAPSHOT',
-        kuma       : '[21.0,21.2)',
-        night_config: '3.8.1',
-        log4j      : '2.20.0'
+        balm         : '21.0.29-SNAPSHOT',
+        kuma         : '[21.0,21.2)',
+        night_config : '3.8.1',
+        log4j        : '2.20.0',
+        junit        : '5.9.3'
     ]
 
     libraries = [
@@ -17,6 +18,11 @@ ext {
             log4j: [
                 core : "org.apache.logging.log4j:log4j-core:${versions.log4j}",
                 api  : "org.apache.logging.log4j:log4j-api:${versions.log4j}"
+            ],
+
+            junit: [
+                    engine: "org.junit.jupiter:junit-jupiter-engine:${versions.junit}",
+                    api: "org.junit.jupiter:junit-jupiter-api:${versions.junit}"
             ]
         ],
 

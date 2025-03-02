@@ -9,6 +9,10 @@ apply from: rootProject.file('dependencies.gradle')
 
 dependencies {
     api project(':core:api')
+    implementation project(':core:utils')
+
+    testImplementation(libraries.global.junit.engine)
+    testImplementation(libraries.global.junit.api)
 
     implementation(libraries.global.night_config.core)
     implementation(libraries.global.night_config.toml)
@@ -53,4 +57,8 @@ loom {
             runDir('runs/server')
         }
     }
+}
+
+test {
+    useJUnitPlatform()
 }

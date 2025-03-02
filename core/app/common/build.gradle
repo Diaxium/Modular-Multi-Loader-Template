@@ -9,6 +9,10 @@ apply from: rootProject.file("dependencies.gradle")
 
 dependencies {
     api project(':core:api')
+    implementation project(':core:utils')
+
+    testImplementation(libraries.global.junit.engine)
+    testImplementation(libraries.global.junit.api)
 
     implementation(libraries.global.night_config.core)
     implementation(libraries.global.night_config.toml)
@@ -55,4 +59,8 @@ configurations {
 artifacts {
     commonJava sourceSets.main.java.sourceDirectories.singleFile
     commonResources sourceSets.main.resources.sourceDirectories.singleFile
+}
+
+test {
+    useJUnitPlatform()
 }

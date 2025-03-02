@@ -7,10 +7,17 @@ plugins {
 apply from: rootProject.file('dependencies.gradle')
 
 dependencies {
+    testImplementation(libraries.global.junit.engine)
+    testImplementation(libraries.global.junit.api)
+
     implementation(libraries.global.night_config.core)
     implementation(libraries.global.night_config.toml)
     implementation(libraries.global.night_config.json)
 
     implementation(libraries.global.log4j.core)
     implementation(libraries.global.log4j.api)
+}
+
+test {
+    useJUnitPlatform()
 }
