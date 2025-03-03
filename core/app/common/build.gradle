@@ -5,31 +5,33 @@ plugins {
     id ("net.neoforged.moddev")
 }
 
-apply from: rootProject.file("dependencies.gradle")
-
 dependencies {
-    api project(':core:api')
-    implementation project(':core:utils')
+    // Project dependencies - referencing other modules in the project
+    api project(':core:api')                // Exposes the API module to consumers of this module
+    implementation project(':core:utils')   // Uses the utils module internally only
 
-    testImplementation(libraries.global.junit.engine)
-    testImplementation(libraries.global.junit.api)
+    // Third-party library dependencies (platform-agnostic)
+    implementation libs.balm.common         // Balm mod API for common (shared) code
+    implementation libs.kuma.common         // Kuma library for common code
 
-    implementation(libraries.global.night_config.core)
-    implementation(libraries.global.night_config.toml)
-    implementation(libraries.global.night_config.json)
-
-    implementation(libraries.global.log4j.core)
-    implementation(libraries.global.log4j.api)
-
-    implementation (libraries.common.kuma)
-    implementation (libraries.common.balm) {
-        changing = versions.balm.endsWith("SNAPSHOT")
+    // Configuration with dynamic version handling
+    implementation (libs.balm.common) {
+        changing = libs.versions.balm.get().endsWith("SNAPSHOT")  // Updates Balm immediately when using SNAPSHOT versions
     }
 
-    compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
-    // fabric and neoforge both bundle mixinextras, so it is safe to use it in common
-    compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
-    annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
+    // Bundled dependencies for better organization
+    implementation libs.bundles.night.config  // Configuration file handling libraries
+    implementation libs.bundles.log4j         // Logging framework and extensions
+
+    // Testing dependencies
+    testImplementation libs.bundles.junit     // JUnit testing framework and extensions
+
+    // Mixin support for transforming Minecraft code at runtime
+    compileOnly libs.mixin                    // Mixin annotation processor - compile-time only dependency
+
+    // MixinExtras for enhanced mixin functionality
+    compileOnly libs.mixinextras.common       // Extended mixin capabilities - compile-time only
+    annotationProcessor libs.mixinextras.common  // Processes MixinExtras annotations during compilation
 }
 
 neoForge {

@@ -26,3 +26,4 @@ plugins/.gradle
 /core/app/platform/fabric/run
 /core/app/platform/forge/run
 /core/app/platform/neoforge/run
+/core/app/platform/forge/build

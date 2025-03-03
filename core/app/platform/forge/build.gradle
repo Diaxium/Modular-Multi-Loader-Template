@@ -7,32 +7,31 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
 }
 
-apply from: rootProject.file('dependencies.gradle')
-
 dependencies {
-    api project(':core:api')
-    implementation project(':core:utils')
+    // Project dependencies - referencing other modules in the project
+    api project(':core:api')                // Exposes the API module to consumers of this module
+    implementation project(':core:utils')   // Uses the utils module internally only
 
-    testImplementation(libraries.global.junit.engine)
-    testImplementation(libraries.global.junit.api)
+    // Third-party library dependencies for Forge platform
+    implementation libs.balm.forge       // Balm mod API configured for Forge
+    implementation libs.kuma.forge       // Kuma library for Forge platform
 
-    implementation(libraries.global.night_config.core)
-    implementation(libraries.global.night_config.toml)
-    implementation(libraries.global.night_config.json)
-
-    implementation(libraries.global.log4j.core)
-    implementation(libraries.global.log4j.api)
-
-    implementation (libraries.forge.kuma)
-    implementation (libraries.forge.balm) {
-        changing = versions.balm.endsWith("SNAPSHOT")
+    // Configuration with dynamic version handling
+    implementation (libs.balm.forge) {
+        changing = libs.versions.balm.get().endsWith("SNAPSHOT")  // Updates Balm immediately when using SNAPSHOT versions
     }
 
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+    // Bundled dependencies for better organization
+    implementation libs.bundles.night.config  // Configuration file handling libraries
+    implementation libs.bundles.log4j         // Logging framework and extensions
 
-    // Forge's hack fix
-    implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
+    // Testing dependencies
+    testImplementation libs.bundles.junit     // JUnit testing framework and extensions
+
+    // Minecraft and Forge environment setup
+    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+    implementation (libs.jopt.simple) { version { strictly '5.0.4' } }
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 }
 
 base {

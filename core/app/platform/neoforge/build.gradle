@@ -5,27 +5,26 @@ plugins {
     id("net.neoforged.moddev")
 }
 
-apply from: rootProject.file('dependencies.gradle')
-
 dependencies {
-    api project(':core:api')
-    api project(':core:utils')
+    // Project dependencies - referencing other modules in the project
+    api project(':core:api')                // Exposes the API module to consumers of this module
+    implementation project(':core:utils')   // Uses the utils module internally only
 
-    testImplementation(libraries.global.junit.engine)
-    testImplementation(libraries.global.junit.api)
+    // Third-party library dependencies for NeoForge platform
+    implementation libs.balm.neoforge       // Balm mod API configured for NeoForge
+    implementation libs.kuma.neoforge       // Kuma library for NeoForge platform
 
-    implementation(libraries.global.night_config.core)
-    implementation(libraries.global.night_config.toml)
-    implementation(libraries.global.night_config.json)
-
-    implementation(libraries.global.log4j.core)
-    implementation(libraries.global.log4j.api)
-
-    implementation (libraries.neoforge.kuma)
-    implementation (libraries.neoforge.balm) {
-        changing = versions.balm.endsWith("SNAPSHOT")
+    // Configuration with dynamic version handling
+    implementation (libs.balm.neoforge) {
+        changing = libs.versions.balm.get().endsWith("SNAPSHOT")  // Updates Balm immediately when using SNAPSHOT versions
     }
 
+    // Bundled dependencies for better organization
+    implementation libs.bundles.night.config  // Configuration file handling libraries
+    implementation libs.bundles.log4j         // Logging framework and extensions
+
+    // Testing dependencies
+    testImplementation libs.bundles.junit     // JUnit testing framework and extensions
 }
 
 neoForge {
@@ -39,6 +38,9 @@ neoForge {
         minecraftVersion = parchment_minecraft
         mappingsVersion = parchment_version
     }
+
+    validateAccessTransformers = true
+
     runs {
         configureEach {
             systemProperty('neoforge.enabledGameTestNamespaces', project_id)

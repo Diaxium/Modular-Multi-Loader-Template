@@ -1,0 +1,54 @@
+[versions]
+# Core dependencies
+balm = "21.0.29-SNAPSHOT"
+kuma = "[21.0,21.2)"
+night_config = "3.8.1"
+log4j = "2.20.0"
+junit = "5.9.3"
+mixin = "0.8.5"
+mixinextras = "0.3.5"
+
+# Third-party libs
+jopt_simple = "5.0.4"
+
+[libraries]
+# Night Config
+night_config_core = { module = "com.electronwill.night-config:core", version.ref = "night_config" }
+night_config_toml = { module = "com.electronwill.night-config:toml", version.ref = "night_config" }
+night_config_json = { module = "com.electronwill.night-config:json", version.ref = "night_config" }
+
+# Log4j
+log4j_core = { module = "org.apache.logging.log4j:log4j-core", version.ref = "log4j" }
+log4j_api = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j" }
+
+# JUnit
+junit_engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+junit_api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+
+# Common
+balm_common = { module = "net.blay09.mods:balm-common", version.ref = "balm" }
+kuma_common = { module = "net.blay09.mods:kuma-api-common", version.ref = "kuma" }
+
+# Fabric
+balm_fabric = { module = "net.blay09.mods:balm-fabric", version.ref = "balm" }
+kuma_fabric = { module = "net.blay09.mods:kuma-api-fabric", version.ref = "kuma" }
+
+# Forge
+balm_forge = { module = "net.blay09.mods:balm-forge", version.ref = "balm" }
+kuma_forge = { module = "net.blay09.mods:kuma-api-forge", version.ref = "kuma" }
+
+# NeoForge
+balm_neoforge = { module = "net.blay09.mods:balm-neoforge", version.ref = "balm" }
+kuma_neoforge = { module = "net.blay09.mods:kuma-api-neoforge", version.ref = "kuma" }
+
+# Mixin
+mixin = { module = "org.spongepowered:mixin", version.ref = "mixin" }
+mixinextras_common = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixinextras" }
+
+# Other libs
+jopt_simple = { module = "net.sf.jopt-simple:jopt-simple", version.ref = "jopt_simple" }
+
+[bundles]
+night_config = ["night_config_core", "night_config_toml", "night_config_json"]
+log4j = ["log4j_core", "log4j_api"]
+junit = ["junit_engine", "junit_api"]

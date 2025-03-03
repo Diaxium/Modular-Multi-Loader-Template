@@ -5,34 +5,35 @@ plugins {
     id("fabric-loom")
 }
 
-apply from: rootProject.file('dependencies.gradle')
-
 dependencies {
-    api project(':core:api')
-    implementation project(':core:utils')
+    // Project dependencies - referencing other modules in the project
+    api project(':core:api')                // Exposes the API module to consumers of this module
+    implementation project(':core:utils')   // Uses the utils module internally only
 
-    testImplementation(libraries.global.junit.engine)
-    testImplementation(libraries.global.junit.api)
+    // Third-party library dependencies
+    implementation libs.balm.fabric         // Adds Balm API support for Fabric
+    implementation libs.kuma.fabric         // Includes Kuma library for Fabric platform
 
-    implementation(libraries.global.night_config.core)
-    implementation(libraries.global.night_config.toml)
-    implementation(libraries.global.night_config.json)
-
-    implementation(libraries.global.log4j.core)
-    implementation(libraries.global.log4j.api)
-
-    implementation (libraries.fabric.kuma)
-    implementation (libraries.fabric.balm) {
-        changing = versions.balm.endsWith("SNAPSHOT")
+    // Configuration with dynamic version handling
+    implementation (libs.balm.fabric) {
+        changing = libs.versions.balm.get().endsWith("SNAPSHOT")  // Updates Balm immediately when using SNAPSHOT versions
     }
 
-    minecraft "com.mojang:minecraft:${minecraft_version}"
+    // Bundled dependencies for better organization
+    implementation libs.bundles.night.config  // Configuration file handling libraries
+    implementation libs.bundles.log4j         // Logging framework and extensions
+
+    // Testing dependencies
+    testImplementation libs.bundles.junit     // JUnit testing framework and extensions
+
+    // Minecraft and Fabric environment setup
+    minecraft "com.mojang:minecraft:${minecraft_version}"  // Core Minecraft game
     mappings loom.layered {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
+        officialMojangMappings()              // Official Mojang obfuscation mappings
+        parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")  // Adds Parchment community mappings for better field/method names
     }
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"  // Fabric mod loader
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"  // Fabric API providing hooks and utilities
 }
 
 loom {
