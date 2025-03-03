@@ -1,5 +1,8 @@
 package com.example.modular_multi_loader_template.platform.types;
 
+import com.example.modular_multi_loader_template.api.platform.types.Environment;
+import com.example.modular_multi_loader_template.api.platform.types.ModInfo;
+import com.example.modular_multi_loader_template.api.platform.types.Platform;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

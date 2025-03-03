@@ -16,7 +16,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.example.modular_multi_loader_template.FabricBootstrap"
+      "com.example.modular_multi_loader_template.fabric.core.FabricEntryPoint"
     ]
   },
   "mixins": [

@@ -1,4 +1,3 @@
-com.example.modular_multi_loader_template
-com.example.modular_multi_loader_template.platform
-com.example.modular_multi_loader_template.platform.services
-com.example.modular_multi_loader_template.platform.types
+com.example.modular_multi_loader_template.api.platform
+com.example.modular_multi_loader_template.api.platform.services
+com.example.modular_multi_loader_template.api.platform.types

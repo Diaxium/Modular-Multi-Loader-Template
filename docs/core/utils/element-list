@@ -1,3 +1,2 @@
-com.example.modular_multi_loader_template
-com.example.modular_multi_loader_template.functions
-com.example.modular_multi_loader_template.functions.logging
+com.example.modular_multi_loader_template.utils.functions
+com.example.modular_multi_loader_template.utils.functions.logging

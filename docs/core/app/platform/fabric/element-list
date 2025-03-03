@@ -1,2 +1,4 @@
-com.example.modular_multi_loader_template
-com.example.modular_multi_loader_template.platform
+com.example.modular_multi_loader_template.common.core
+com.example.modular_multi_loader_template.common.shared
+com.example.modular_multi_loader_template.fabric.core
+com.example.modular_multi_loader_template.fabric.platform

@@ -1,5 +1,6 @@
 package com.example.modular_multi_loader_template.platform.types;
 
+import com.example.modular_multi_loader_template.api.platform.types.Environment;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
