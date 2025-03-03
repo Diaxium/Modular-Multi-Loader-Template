@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.example.modular_multi_loader_template.common.core"},{"l":"com.example.modular_multi_loader_template.common.shared"}];updateSearchResults();

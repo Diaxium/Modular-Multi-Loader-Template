@@ -7,7 +7,7 @@ public class MainEntrypoint {
     public static void initialize()    {
         Constants.LOG.info("Common Loaded!");
 
-        // Add any needed initialization code here.
+        // Add any necessary initialization code here.
         Constants.LOG.info(Services.PLATFORM.getInfo().toString());
     }
 }

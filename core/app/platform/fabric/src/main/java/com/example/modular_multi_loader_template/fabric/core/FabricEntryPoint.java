@@ -1,6 +1,5 @@
 package com.example.modular_multi_loader_template.fabric.core;
 
-
 import com.example.modular_multi_loader_template.common.core.MainEntrypoint;
 import net.fabricmc.api.ModInitializer;
 
