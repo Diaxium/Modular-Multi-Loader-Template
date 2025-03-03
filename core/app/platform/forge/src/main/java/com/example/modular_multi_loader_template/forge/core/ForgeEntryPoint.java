@@ -8,7 +8,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(Constants.PROJECT_ID)
 public class ForgeEntryPoint {
-    public void ForgeBootstrap(FMLJavaModLoadingContext context)    {
+    public ForgeEntryPoint(FMLJavaModLoadingContext context)    {
         // Initialization code
         MainEntrypoint.initialize();
     }
