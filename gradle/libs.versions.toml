@@ -5,8 +5,9 @@ kuma = "[21.0,21.2)"
 night_config = "3.8.1"
 log4j = "2.20.0"
 junit = "5.9.3"
+mockito = "5.16.0"
 mixin = "0.8.5"
-mixinextras = "0.3.5"
+mixinextras = "0.5.0-beta.5"
 
 # Third-party libs
 jopt_simple = "5.0.4"
@@ -24,6 +25,9 @@ log4j_api = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4
 # JUnit
 junit_engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 junit_api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit_params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit" }
+mockito_core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+mockito_junit = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockito" }
 
 # Common
 balm_common = { module = "net.blay09.mods:balm-common", version.ref = "balm" }
@@ -51,4 +55,4 @@ jopt_simple = { module = "net.sf.jopt-simple:jopt-simple", version.ref = "jopt_s
 [bundles]
 night_config = ["night_config_core", "night_config_toml", "night_config_json"]
 log4j = ["log4j_core", "log4j_api"]
-junit = ["junit_engine", "junit_api"]
+junit = ["junit_engine", "junit_api", "junit_params", "mockito_core", "mockito_junit"]
